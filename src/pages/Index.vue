@@ -78,7 +78,7 @@ export default {
       weatherData: null,
       lat: null,
       long: null,
-      apiKey: 'e9ab09d59edb02dae83be573fb132d30',
+      apiKey: 'aqui debe ir tu clave de api',
       dataUrl: ''
     }
   },
