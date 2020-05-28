@@ -26,4 +26,5 @@ See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
 
 ### Preview (Vista Previa)
 
-![mockup](https://user-images.githubusercontent.com/60223915/83167100-cf0a5980-a0dd-11ea-81c6-cb2dda678ca2.jpg)
+![weather-app](https://user-images.githubusercontent.com/60223915/83177085-7a220f80-a0ec-11ea-86d2-7d6eb8730124.jpg)
+
