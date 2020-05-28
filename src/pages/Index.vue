@@ -35,7 +35,7 @@
         {{weatherData.weather[0].description}}
       </div>
       <div class="text-h1 text-weight-thin-q-my-lg relative-position">
-        <span>{{weatherData.main.temp}}</span>
+        <span>{{Math.round(weatherData.main.temp)}}</span>
         <span class="text-h4 relative-position degree">&deg;</span>
       </div>
     </div>
@@ -78,7 +78,7 @@ export default {
       weatherData: null,
       lat: null,
       long: null,
-      apiKey: 'aqui debe ir tu clave de api',
+      apiKey: 'Tu Api Key debe ir aqui',
       dataUrl: ''
     }
   },
@@ -88,7 +88,6 @@ export default {
       navigator.geolocation.getCurrentPosition(position => {
         this.lat = position.coords.latitude
         this.long = position.coords.longitude
-        console.log('position: ', this.lat, this.long)
         this.getWeather()
       })
     },
