@@ -40,14 +40,11 @@ import qboot_Bootaxios from 'boot/axios'
 
 
 
-
-
-Vue.config.devtools = true
-Vue.config.productionTip = false
+import electron from 'electron'
+Vue.prototype.$q.electron = electron
 
 
 
-console.info('[Quasar] Running SPA.')
 
 
 

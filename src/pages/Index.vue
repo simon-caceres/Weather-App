@@ -49,7 +49,7 @@
   <template v-else>
     <div class="col column text-center text-white">
       <div class="col text-h2 text-weight-thin">
-        Quasar<br>Weather
+        World<br>Weather
       </div>
       <q-btn 
         @click="getLocation"
@@ -78,26 +78,40 @@ export default {
       weatherData: null,
       lat: null,
       long: null,
-      apiKey: 'Tu Api Key debe ir aqui visitar web site de api weather',
+      apiKey: 'e9ab09d59edb02dae83be573fb132d30',
       dataUrl: ''
     }
   },
 
   methods: { 
     getLocation () {
-      navigator.geolocation.getCurrentPosition(position => {
-        this.lat = position.coords.latitude
-        this.long = position.coords.longitude
-        this.getWeather()
-      })
+      this.$q.loading.show()
+      if (this.$q.platform.is.electron) {
+        this.$axios.get('https://freegeoip.app/json/')
+          .then(res => {
+            this.lat = res.data.latitude;
+            this.long = res.data.longitude;
+            this.getWeather()
+          })
+        
+      }
+      else {
+        navigator.geolocation.getCurrentPosition(position => {
+          this.lat = position.coords.latitude
+          this.long = position.coords.longitude
+          this.getWeather()
+        })
+      }
+
     },
 
     getWeather() {
+      this.$q.loading.show()
       this.$axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${this.lat}&lon=${this.long}&appid=${this.apiKey}&units=metric`)
       .then(response=>{
         this.weatherData = response.data
         this.dataUrl = `http://openweathermap.org/img/wn/${this.weatherData.weather[0].icon}@2x.png`
-        
+        this.$q.loading.hide()
       })
       .catch(error => {
         console.log(error)
@@ -105,10 +119,12 @@ export default {
     },
 
     getWeatherCity() {
+      this.$q.loading.show()
       this.$axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.search}&appid=${this.apiKey}&units=metric`)
         .then(response => {
           this.weatherData = response.data
           this.dataUrl = `http://openweathermap.org/img/wn/${this.weatherData.weather[0].icon}@2x.png`
+          this.$q.loading.hide()
         })
         .catch(error => {
           console.log(error)
